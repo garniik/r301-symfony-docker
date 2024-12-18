@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LuckyController!
+{% endblock %}
+
+{% block body %}
+
+	<div id="layoutSidenav_content">
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4">Static Navigation</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item">
+						<a href="index.html">Dashboard</a>
+					</li>
+					<li class="breadcrumb-item active">Static Navigation</li>
+				</ol>
+				<div class="row">
+					{% for article in articles %}
+						<div class="col-md-4 mb-4">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">{{ article.titre }}
+										{{ article.id}}</h5>
+									<img src="{{ asset('uploads/brochures/' ~ article.Image) }}"/img>
+									<p class="card-text">{{ article.texte }}</p>
+									{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+									<a href="{{ path('article_modify', {'id': article.id}) }}" class="btn btn-primary">modifier</a>
+                                    <a href="{{ path('article_delete', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>
+									{% endif %}
+									{% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+									<a href="{{ path('app_login', {'id': article.id}) }}" class="btn btn-primary">modifier</a>
+                                    <a href="{{ path('app_login', {'id': article.id}) }}" class="btn btn-danger">Supprimer</a>
+									{% endif %}
+
+								</div>
+								<div class="card-footer text-muted">
+									Publié le
+									{{ article.date|date('d/m/Y H:i') }}
+								</div>
+							</div>
+						</div>
+					{% else %}
+						<p>Aucun article disponible.</p>
+					{% endfor %}
+				</div>
+			</div>
+		</main>
+
+	</div>
+</div>{% endblock %}

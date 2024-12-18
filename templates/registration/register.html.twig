@@ -1,0 +1,43 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello LuckyController!
+{% endblock %}
+
+{% block body %}
+
+	<div id="layoutSidenav_content">
+		<body>
+			{{ form_errors(registrationForm) }}
+		</body>
+		<main>
+			<div class="container-fluid px-4">
+				<h1 class="mt-4">Static Navigation</h1>
+				<ol class="breadcrumb mb-4">
+					<li class="breadcrumb-item">
+						<a href="index.html">Dashboard</a>
+					</li>
+					<li class="breadcrumb-item active">Static Navigation</li>
+				</ol>
+                <h1>Register</h1>
+				<div class="card mb-4">
+					<div class="card-body">
+						{{ form_start(registrationForm) }}
+			{{ form_row(registrationForm.email) }}
+			{{ form_row(registrationForm.plainPassword, {
+            label: 'Password'
+        }) }}
+			{{ form_row(registrationForm.agreeTerms) }}
+
+			<button type="submit" class="btn btn-primary">Register</button>
+			{{ form_end(registrationForm) }}
+						</div>
+					</div>
+					<div style="height: 100vh"></div>
+				</div>
+			</main>
+
+		</div>
+	</div>
+
+{% endblock %}
